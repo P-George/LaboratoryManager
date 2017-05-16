@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="action" extends="struts-default" namespace="/">
+		<action name="login" class="uno.meng.login" method="execute">
+            <result name="success">/main.jsp</result>
+            <result name="error">/error.jsp</result>
+            <result name="new">/first.jsp</result>
+        </action>
+        <action name="register" class="uno.meng.register" method="execute">
+            <result name="success">/first.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="reflesh" class="uno.meng.reflesh" method="execute">
+            <result name="success">/main.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="addme" class="uno.meng.addme" method="execute">
+            <result name="success">/projects.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        <action name="addhobby" class="uno.meng.addhobby" method="execute">
+            <result name="success">/main.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="addedu" class="uno.meng.addedu" method="execute">
+            <result name="success">/main.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="addjob" class="uno.meng.addjob" method="execute">
+            <result name="success">/main.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+         <action name="deleteme" class="uno.meng.deleteme" method="execute">
+            <result name="success">/projects.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="search" class="uno.meng.search" method="dosearch">
+        <result>
+           index.jsp
+         </result>
+         
+    </action>
+	</package>
+</struts>
