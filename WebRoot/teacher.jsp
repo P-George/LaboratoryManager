@@ -105,7 +105,6 @@ if(String.valueOf(session.getAttribute("SSN")).equals("null")){
 <!--                                 <p class="large-paragraph">待拓展！</p>         
  -->                                <!--DESCRIPTION ON HOME ENDS-->
                             </div>
-
                             <!--ALL PERSONAL DETAILS-->
                             <h3 class="personal-info-title title">个人信息</h3>
                             <ul class="personal-info">
