@@ -25,14 +25,23 @@ public class login{
 	  }
 	  public String execute() {
 	    String result = "success";
+	    if(searchPass(Integer.parseInt(SSN)) != null){
 	    if(searchPass(Integer.parseInt(SSN)).equals(password)){
-	    	if(searchName(Integer.parseInt(SSN))==null || searchName(Integer.parseInt(SSN)).equals("")){
-	    		return "new";
-	    	}else{
-	        return result;
-	    	}
+	    		if(searchName(Integer.parseInt(SSN))==null || searchName(Integer.parseInt(SSN)).equals("")){
+	    			return "new";
+	    		}else{
+	    			return result;
+	    		}
 	    }else{
-	    	return "error";
+	    		return "error";
+	    }
+	    }else{
+	    	//老师
+	    	if(searchPass2(Integer.parseInt(SSN)).equals(password)){
+	    			return "teacher";
+	    }else{
+	    		return "error";
+	    }
 	    }
 	  }
 	public String searchPass(int SSN){
@@ -46,7 +55,22 @@ public class login{
             ret.close();  
             db.close();//关闭连接  
         } catch (SQLException e) {  
-            e.printStackTrace();  
+            return null;
+        }
+        return null;
+	}
+	public String searchPass2(int SSN){
+		sql = "select * from TEACHER where SSN = "+SSN;//SQL语句  
+        db = new DBHelper(sql);//创建DBHelper对象  
+        try {  
+            ret = db.pst.executeQuery();//执行语句，得到结果集  
+            while (ret.next()){  
+               return ret.getString("PASSWORD");
+            }//显示数据  
+            ret.close();  
+            db.close();//关闭连接  
+        } catch (SQLException e) {  
+            return null;
         }
         return null;
 	}
@@ -60,8 +84,8 @@ public class login{
             }//显示数据  
             ret.close();  
             db.close();//关闭连接  
-        } catch (SQLException e) {  
-            e.printStackTrace();  
+        } catch (SQLException e) { 
+        		return null;
         }
         return null;
 	}

@@ -68,6 +68,7 @@ if(String.valueOf(session.getAttribute("SSN")).equals("null")){
          %>
           <a href="lab.jsp" class="item">实验室</a>
           <a href="projects.jsp" class="item">项目</a>
+          <a href="course.jsp" class="item">课程</a>
           <%
           }
            %>
@@ -88,8 +89,8 @@ if(String.valueOf(session.getAttribute("SSN")).equals("null")){
       </div>
     </div>
     <div class="banner">
-      <h2 class="banner-titlte"><img src="images/banner-title_img.svg" alt="#"></h2>
-      <div class="search">
+<!--       <h2 class="banner-titlte"><img src="images/banner-title_img.svg" alt="#"></h2>
+ -->      <div class="search">
           <input type="text" class="search-text" id="content" placeholder="搜索你喜欢的"/>
           <button id ="searchbtn" class="search-btn sprite_icon"></button>
       </div>

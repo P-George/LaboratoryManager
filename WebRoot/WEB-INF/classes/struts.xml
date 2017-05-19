@@ -7,6 +7,7 @@
 	<package name="action" extends="struts-default" namespace="/">
 		<action name="login" class="uno.meng.login" method="execute">
             <result name="success">/main.jsp</result>
+            <result name="teacher">/teacher.jsp</result>
             <result name="error">/error.jsp</result>
             <result name="new">/first.jsp</result>
         </action>
@@ -40,10 +41,23 @@
             <result name="error">/error.jsp</result>
         </action>
         <action name="search" class="uno.meng.search" method="dosearch">
-        <result>
-           index.jsp
-         </result>
-         
-    </action>
+        	<result>index.jsp</result>
+        </action>
+         <action name="addmetocourse" class="uno.meng.addmetocourse" method="execute">
+            <result name="success">/course.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+         <action name="deletemefromcourse" class="uno.meng.deletemefromcourse" method="execute">
+            <result name="success">/course.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="addcourse" class="uno.meng.addcourse" method="execute">
+            <result name="success">/teacher.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="addresearch" class="uno.meng.addresearch" method="execute">
+            <result name="success">/teacher.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
 	</package>
 </struts>

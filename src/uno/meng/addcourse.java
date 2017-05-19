@@ -5,34 +5,29 @@ import java.sql.SQLException;
 
 import uno.meng.db.DBHelper;
 
-public class deleteme {
+public class addcourse {
 	static String sql = new String();  
     static DBHelper db = null;  
     static ResultSet ret = null;  
     static int retu = 0;
     private String SSN;
+    private String name;
+    private String description;
     public String getSSN() {
 		return SSN;
 	}
 	public void setSSN(String sSN) {
 		SSN = sSN;
 	}
-	public String getProjectno() {
-		return projectno;
-	}
-	public void setProjectno(String projectno) {
-		this.projectno = projectno;
-	}
-	private String projectno;
     public String execute(){
 	    String result = "success";
-	    if(DeleteProject(Integer.parseInt(SSN),Integer.parseInt(projectno))){
+	    if(Insert(Integer.parseInt(SSN),name,description)){
 	    		return result;
 	    }
-	    return "success";
+	    return "error";
     }
-    public boolean DeleteProject(int SSN,int projectno){
-		sql = "delete from WORKS_ON where SSN = "+SSN+" and PROJECTNO = "+projectno;//SQL语句  
+    public boolean Insert(int SSN,String name,String description){
+		sql = "insert into COURSE(SSN,NAME,DESCRIPTION) values("+SSN+",\'"+name+"\',\'"+description+"\')";//SQL语句  
         db = new DBHelper(sql);//创建DBHelper对象  
         try {  
             retu = db.pst.executeUpdate(sql);
@@ -41,8 +36,21 @@ public class deleteme {
             }//显示数据  
             db.close();//关闭连接  
         } catch (SQLException e){  
-            return false;  
+            e.printStackTrace();  
         }
         return false;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

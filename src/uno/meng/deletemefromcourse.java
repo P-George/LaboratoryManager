@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import uno.meng.db.DBHelper;
 
-public class deleteme {
+public class deletemefromcourse {
 	static String sql = new String();  
     static DBHelper db = null;  
     static ResultSet ret = null;  
@@ -32,7 +32,7 @@ public class deleteme {
 	    return "success";
     }
     public boolean DeleteProject(int SSN,int projectno){
-		sql = "delete from WORKS_ON where SSN = "+SSN+" and PROJECTNO = "+projectno;//SQL语句  
+		sql = "delete from STUDY where SSN = "+SSN+" and COURSENO = "+projectno;//SQL语句  
         db = new DBHelper(sql);//创建DBHelper对象  
         try {  
             retu = db.pst.executeUpdate(sql);
@@ -41,7 +41,7 @@ public class deleteme {
             }//显示数据  
             db.close();//关闭连接  
         } catch (SQLException e){  
-            return false;  
+            return false;
         }
         return false;
 	}

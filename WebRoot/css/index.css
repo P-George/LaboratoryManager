@@ -53,13 +53,12 @@
   width: 1248px;
   margin: 0 auto;
 }
-.header-logo {
+/* .header-logo {
   float: left;
-  width: 80px;
+  width: 10px;
   height: 28px;
   margin-top: 10px;
-  background: url(../images/logo_white.svg) no-repeat;
-}
+} */
 .header-nav {
   float: left;
   padding: 10px 22px 0 20px;
@@ -251,7 +250,7 @@
   background-color: #fff;
 }
 .header-top__fixed .header-logo {
-  background: url(../images/logo_red.svg) no-repeat;
+  background: url(../images/red.png) no-repeat;
 }
 .header-top__fixed .header-nav .item {
   color: #333;

@@ -59,6 +59,12 @@ public class search extends ActionSupport {
 			case "student_query2":
 				searchProjectStudent(params[0]);
 				break;
+			case "all":
+				searchALLProjectStudent();
+				break;
+			case "notin":
+				searchNOTProjectStudent(Integer.parseInt(params[0]));
+				break;
 			default:
 				break;
 		}
@@ -109,7 +115,36 @@ public class search extends ActionSupport {
             }//显示数据  
             ret.close();  
             db.close();//关闭连接  
-        } catch (SQLException e) {  
+        } catch (SQLException e){  
+            e.printStackTrace();  
+        }
+	}
+	
+	public void searchNOTProjectStudent(int num){
+		sql = " SELECT SSN,NAME from STUDENT where SSN not in ( select STUDENT.SSN from STUDENT, works_on where STUDENT.SSN=works_on.SSN and works_on.PROJECTNO="+num+")";//SQL语句  
+        db = new DBHelper(sql);//创建DBHelper对象  
+        try {  
+            ret = db.pst.executeQuery();//执行语句，得到结果集  
+            while (ret.next()){  
+          	  dataMap.put(String.valueOf(ret.getInt(1)),ret.getString(2));
+            }//显示数据  
+            ret.close();  
+            db.close();//关闭连接  
+        } catch (SQLException e){  
+            e.printStackTrace();  
+        }
+	}
+	public void searchALLProjectStudent(){
+		sql = " select SSN,NAME from STUDENT NATURAL join  works_on GROUP BY SSN HAVING COUNT(PROJECTNO)=(SELECT count(*) from project)";//SQL语句  
+        db = new DBHelper(sql);//创建DBHelper对象  
+        try {  
+            ret = db.pst.executeQuery();//执行语句，得到结果集  
+            while (ret.next()){  
+          	  dataMap.put(String.valueOf(ret.getInt(1)),ret.getString(2));
+            }//显示数据  
+            ret.close();  
+            db.close();//关闭连接  
+        } catch (SQLException e){  
             e.printStackTrace();  
         }
 	}

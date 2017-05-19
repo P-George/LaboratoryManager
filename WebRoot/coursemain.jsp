@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div class="table-responsive">
           <table id="firm_table" class="table table-striped table-bordered table-hover">
           <%
-			  String sql = "select * from LABORATORY where NO = "+Integer.parseInt(name);//SQL语句  
+			  String sql = "select * from course where NO = "+Integer.parseInt(name);//SQL语句  
               DBHelper db = new DBHelper(sql);//创建DBHelper对象  
               ResultSet ret = db.pst.executeQuery();//执行语句，得到结果集  
               while (ret.next()){  
@@ -53,58 +53,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td><%=ret.getString(2) %></td>
               </tr>
               <tr>
-                <td>成立时间</td>
-                <td><%=ret.getString(3) %></td>
-              </tr>
-               <tr>
-                <td>老师人数</td>
+                <td>开课老师</td>
                 <td><%=ret.getInt(4) %></td>
               </tr>
               <tr>
-                <td>所长</td>
-                <td><%=ret.getInt(5) %></td>
+                <td>描述</td>
+                <td><%=ret.getString(3) %></td>
               </tr>
               <tr>
-                <td>学生</td>
+                <td>学生SSN</td>
                 <td>
               <%
               }
-              sql = "select * from STUDENT where LABORATORYNO = "+Integer.parseInt(name);//SQL语句 
-              db = new DBHelper(sql);//创建DBHelper对象  
+              sql = "select * from STUDY where COURSENO = "+Integer.parseInt(name);//SQL语句
+              db = new DBHelper(sql);//创建DBHelper对象   
               ResultSet rets = db.pst.executeQuery();//执行语句，得到结果集  
               while (rets.next()){  
                %>
-               <%=rets.getString(2) %><br>
-               <%
-               }
-                %> 
-                </td>
-              </tr>
-              <tr>
-                <td>评价</td>
-                <td>
-              <%
-              sql = "select * from IMPRESSION where LABORATORYNO = "+Integer.parseInt(name);//SQL语句 
-              db = new DBHelper(sql);//创建DBHelper对象  
-              ResultSet retss = db.pst.executeQuery();//执行语句，得到结果集  
-              while (retss.next()){  
-               %>
-               <%=retss.getString(2) %><br>
-               <%
-               }
-                %> 
-                </td>
-              </tr>
-              <tr>
-                <td>地址</td>
-                <td>
-              <%
-              sql = "select * from LOCATION where LABNO = "+Integer.parseInt(name);//SQL语句 
-              db = new DBHelper(sql);//创建DBHelper对象  
-              retss = db.pst.executeQuery();//执行语句，得到结果集  
-              while (retss.next()){  
-               %>
-               <%=retss.getString(4)+retss.getString(5)+retss.getString(6) %>&nbsp;&nbsp;<%=retss.getString(3) %><br>
+               <%=rets.getInt(1) %><br>
                <%
                }
                 %> 

@@ -76,12 +76,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 %> 
                 </td>
               </tr>
+               <tr>
+                <td>开设课程</td>
+                <td>
+              <%
+              sql = "select * from COURSE where SSN = "+Integer.parseInt(name);//SQL语句
+              db = new DBHelper(sql);//创建DBHelper对象   
+              rets = db.pst.executeQuery();//执行语句，得到结果集  
+              while (rets.next()){  
+               %>
+               <%=rets.getString(2) %><br>
+               <%
+               }
+                %> 
+                </td>
+              </tr>
+               <tr>
+                <td>完成科研</td>
+                <td>
+              <%
+              sql = "select * from RESEARCH where SSN = "+Integer.parseInt(name);//SQL语句
+              db = new DBHelper(sql);//创建DBHelper对象   
+              rets = db.pst.executeQuery();//执行语句，得到结果集  
+              while (rets.next()){  
+               %>
+               <%=rets.getString(1) %><br>
+               <%
+               }
+                %> 
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
-
     </div>
-
   </div>
 
   <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>

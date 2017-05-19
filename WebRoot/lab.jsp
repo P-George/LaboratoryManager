@@ -45,6 +45,7 @@ if(String.valueOf(session.getAttribute("SSN")).equals("null")){
           <a href="index.jsp" class="item">发现</a>
           <a href="lab.jsp" class="item  item-cur">实验室</a>
           <a href="projects.jsp" class="item">项目</a>
+          <a href="course.jsp" class="item">课程</a>
         </nav>
         <div class="header-user">
         <a href="main.jsp" class="login trigger-custom"><%=User %></a>

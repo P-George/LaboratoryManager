@@ -43,8 +43,8 @@ if(String.valueOf(session.getAttribute("SSN")).equals("null")){
         <nav class="header-nav">
           <a href="index.jsp" class="item">发现</a>
           <a href="lab.jsp" class="item">实验室</a>
-          <a href="projects.jsp" class="item  item-cur">项目</a>
-          <a href="course.jsp" class="item">课程</a>
+          <a href="projects.jsp" class="item ">项目</a>
+          <a href="course.jsp" class="item item-cur">课程</a>
         </nav>
         <div class="header-user">
         <a href="main.jsp" class="login trigger-custom"><%=User %></a>
@@ -61,13 +61,13 @@ if(String.valueOf(session.getAttribute("SSN")).equals("null")){
 				<tr>
 					<th>编号</th>
 					<th>名称</th>
-					<th>时长</th>
+					<th>开课老师</th>
 					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
 			<%
-			  String sql = "select * from PROJECT";//SQL语句  
+			  String sql = "select * from COURSE";//SQL语句  
               DBHelper db = new DBHelper(sql);//创建DBHelper对象  
               ResultSet ret = db.pst.executeQuery();//执行语句，得到结果集  
               while (ret.next()){  
@@ -75,13 +75,13 @@ if(String.valueOf(session.getAttribute("SSN")).equals("null")){
 				<tr>
 				<td class="user-name"><a href="javascript:_iframe(<%=ret.getInt(1) %>)"><%=ret.getInt(1) %></a></td>
 				<td class="user-email"><%=ret.getString(2) %></td>
-				<td class="user-phone"><%=ret.getDouble(3) %></td>
+				<td class="user-phone"><%=ret.getDouble(4) %></td>
 				<%
 				  tmp t = new tmp();
-				  if(!t.search(Integer.parseInt(User),ret.getInt(1))){
+				  if(!t.search2(Integer.parseInt(User),ret.getInt(1))){
 				 %>
 				<td class="user-mobile">
-				<form action="addme" method="get">
+				<form action="addmetocourse" method="get">
 				     <input type="hidden" name="SSN" value="<%=session.getAttribute("SSN")%>">
 				     <input type="hidden" name="projectno" value="<%=ret.getInt(1) %>">     
 				     <button type="submit">加入</button>
@@ -92,25 +92,25 @@ if(String.valueOf(session.getAttribute("SSN")).equals("null")){
 				 %>
 				
 				<td class="user-mobile">
-			    <form action="deleteme" method="get">
+			    <form action="deletemefromcourse" method="get">
 				     <input type="hidden" name="SSN" value="<%=session.getAttribute("SSN")%>">
 				     <input type="hidden" name="projectno" value="<%=ret.getInt(1) %>">     
 				     <button type="submit">离开</button>
 				</form>
 				</td>
 				<%
-				}
+					}
 				 %>
 				</tr>
 				<%
 				}
 				 %>
-				  <script>
+				<script>
 				   function _iframe(name) {
        					 zeroModal.show({
-            				title: '项目'+name+'详情',
+            				title: '课程'+name+'详情',
             				iframe: true,
-           				 url: 'promain.jsp?prono='+name,
+           				 url: 'coursemain.jsp?no='+name,
             			width: '80%',
             			height: '80%',
            				 cancel: true
