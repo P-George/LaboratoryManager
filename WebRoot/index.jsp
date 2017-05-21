@@ -32,7 +32,7 @@ $(function() {
 				},
 				success : function(data) {
 					$("#show").empty();
-					$("#show").append("<tr><td>学号</td><td>姓名</td></tr>");
+					$("#show").append("<tr><td>SSN</td><td>姓名</td></tr>");
 					$.each(data, function(key, value) {
 						$("#show").append("<tr>");
 						$("#show tr:last").append("<td>" + key + "</td>");
@@ -55,6 +55,11 @@ if(String.valueOf(session.getAttribute("SSN")).equals("null")){
 	String name=request.getParameter("SSN");  
 	session.setAttribute("SSN",name);
 	User=String.valueOf(session.getAttribute("SSN")).trim();
+}
+String name=request.getParameter("SSN");  
+if(name != null){
+    session.setAttribute("SSN",null);
+ 	User=String.valueOf(session.getAttribute("SSN")).trim();
 }
 %>
   <header class="header" id="header">
@@ -82,6 +87,7 @@ if(String.valueOf(session.getAttribute("SSN")).equals("null")){
           }else{
            %>
            <a href="main.jsp" class="login "><%=User %></a>
+           <a href="index.jsp?SSN=quit" class="register ">退出</a>
            <%
            }
             %>

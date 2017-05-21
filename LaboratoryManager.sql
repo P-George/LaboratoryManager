@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : utf-8
 
- Date: 05/19/2017 15:56:28 PM
+ Date: 05/21/2017 14:23:16 PM
 */
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -65,13 +65,6 @@ CREATE TABLE `HOBBY` (
   PRIMARY KEY (`SSN`,`CONTENT`),
   CONSTRAINT `hobby_ibfk_1` FOREIGN KEY (`SSN`) REFERENCES `STUDENT` (`SSN`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
---  Records of `HOBBY`
--- ----------------------------
-BEGIN;
-INSERT INTO `HOBBY` VALUES ('1143220116', '??');
-COMMIT;
 
 -- ----------------------------
 --  Table structure for `IMPRESSION`
@@ -167,7 +160,7 @@ CREATE TABLE `RESEARCH` (
   PRIMARY KEY (`NO`),
   KEY `SSN` (`SSN`),
   CONSTRAINT `research_ibfk_1` FOREIGN KEY (`SSN`) REFERENCES `TEACHER` (`SSN`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=100113 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Table structure for `STUDENT`
@@ -187,13 +180,6 @@ CREATE TABLE `STUDENT` (
   KEY `TUTORSSN_3` (`TUTORSSN`),
   KEY `TUTORSSN_4` (`TUTORSSN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
---  Records of `STUDENT`
--- ----------------------------
-BEGIN;
-INSERT INTO `STUDENT` VALUES ('11432211', 'Kuangs', '123', '133@qq.com', '1403102', '1002', '111222'), ('11432215', 'KMM', '0', '12252@qq.com', '0', '0', '123456'), ('1143220116', 'Meng', '100', 'kuangmeng@msn.com', '1403102', '1001', '123456');
-COMMIT;
 
 -- ----------------------------
 --  Table structure for `STUDY`
@@ -251,5 +237,47 @@ CREATE TABLE `WORKS_ON` (
   KEY `PROJECTNO` (`PROJECTNO`),
   CONSTRAINT `works_on_ibfk_1` FOREIGN KEY (`PROJECTNO`) REFERENCES `PROJECT` (`NO`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  View structure for `count_course`
+-- ----------------------------
+DROP VIEW IF EXISTS `count_course`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `count_course` AS select `student`.`SSN` AS `SSN`,`student`.`NAME` AS `NAME`,count(`study`.`COURSENO`) AS `COUNT(COURSENO)` from (`student` join `study`) where (`student`.`SSN` = `study`.`SSN`) group by `study`.`SSN`;
+
+-- ----------------------------
+--  Triggers structure for table STUDENT
+-- ----------------------------
+DROP TRIGGER IF EXISTS `Addtolab`;
+delimiter ;;
+CREATE TRIGGER `Addtolab` AFTER INSERT ON `STUDENT` FOR EACH ROW update LABORATORY  set LABORATORY.NUMBER=LABORATORY.NUMBER+1  where LABORATORY.`NO` = NEW.LABORATORYNO
+ ;;
+delimiter ;
+DROP TRIGGER IF EXISTS `update`;
+delimiter ;;
+CREATE TRIGGER `update` AFTER UPDATE ON `STUDENT` FOR EACH ROW update LABORATORY  set LABORATORY.NUMBER=LABORATORY.NUMBER+1  where LABORATORY.`NO` = NEW.LABORATORYNO
+ ;;
+delimiter ;
+DROP TRIGGER IF EXISTS `deletefromlab`;
+delimiter ;;
+CREATE TRIGGER `deletefromlab` AFTER DELETE ON `STUDENT` FOR EACH ROW update LABORATORY  set LABORATORY.NUMBER=LABORATORY.NUMBER-1  where LABORATORY.`NO` = deleted.LABORATORYNO
+ ;;
+delimiter ;
+
+delimiter ;;
+-- ----------------------------
+--  Triggers structure for table TEACHER
+-- ----------------------------
+ ;;
+delimiter ;
+DROP TRIGGER IF EXISTS `AddteachertoLab`;
+delimiter ;;
+CREATE TRIGGER `AddteachertoLab` AFTER INSERT ON `TEACHER` FOR EACH ROW update LABORATORY  set LABORATORY.NUMBER=LABORATORY.NUMBER+1  where LABORATORY.`NO` = NEW.LABORATORYNO
+ ;;
+delimiter ;
+DROP TRIGGER IF EXISTS `DeleteteacherfromLab`;
+delimiter ;;
+CREATE TRIGGER `DeleteteacherfromLab` AFTER DELETE ON `TEACHER` FOR EACH ROW update LABORATORY  set LABORATORY.NUMBER=LABORATORY.NUMBER-1  where LABORATORY.`NO` = DELETED.LABORATORYNO
+ ;;
+delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;

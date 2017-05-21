@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td><%=ret.getString(3) %></td>
               </tr>
                <tr>
-                <td>老师人数</td>
+                <td>成员人数</td>
                 <td><%=ret.getInt(4) %></td>
               </tr>
               <tr>
