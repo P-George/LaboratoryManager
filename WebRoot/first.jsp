@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/style3.css"> <!-- Resource style -->
 	<script src="js/modernizr.js"></script> <!-- Modernizr -->
 </head>
-<body class="body">
+<body>
   <%
 String User=String.valueOf(session.getAttribute("SSN")).trim();
 if(String.valueOf(session.getAttribute("SSN")).equals("null")){

@@ -17,8 +17,7 @@ body {
   font-size: 1.6rem;
   font-family: "Open Sans", sans-serif;
   color: #2b3e51;
- background: url(../images/main-bg.jpg) no-repeat;
-      background-attachment: fixed;}
+}
 
 a {
   color: #2c97de;
